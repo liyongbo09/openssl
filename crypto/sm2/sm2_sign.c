@@ -111,14 +111,14 @@ int ossl_sm2_compute_z_digest(uint8_t *out,
             || !EVP_DigestUpdate(hash, buf, p_bytes)
             || BN_bn2binpad(b, buf, p_bytes) < 0
             || !EVP_DigestUpdate(hash, buf, p_bytes)
-            || !EC_POINT_get_affine_coordinates(group,
+            || !EC_POINT_get_affine_coordinates_from_pointer(group,
                                                 EC_GROUP_get0_generator(group),
                                                 xG, yG, ctx)
             || BN_bn2binpad(xG, buf, p_bytes) < 0
             || !EVP_DigestUpdate(hash, buf, p_bytes)
             || BN_bn2binpad(yG, buf, p_bytes) < 0
             || !EVP_DigestUpdate(hash, buf, p_bytes)
-            || !EC_POINT_get_affine_coordinates(group,
+            || !EC_POINT_get_affine_coordinates_from_pointer(group,
                                                 EC_KEY_get0_public_key(key),
                                                 xA, yA, ctx)
             || BN_bn2binpad(xA, buf, p_bytes) < 0

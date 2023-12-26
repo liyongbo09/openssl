@@ -896,6 +896,19 @@ int EC_POINT_set_affine_coordinates_GF2m(const EC_GROUP *group,
 # endif
 #endif
 
+int EC_POINT_get_affine_coordinates_from_pointer(const EC_GROUP *group, EC_POINT *generator,
+                                    BIGNUM *x, BIGNUM *y,
+                                    BN_CTX *ctx)
+{
+    BN_ULONG  out[4];
+    bn_copy_words(out, generator->X, 4);
+    bn_set_words(x, out, 4);
+    bn_copy_words(out, generator->Y, 4);
+    bn_set_words(y, out, 4);
+    return 1;
+
+}
+
 int EC_POINT_get_affine_coordinates(const EC_GROUP *group,
                                     const EC_POINT *point, BIGNUM *x, BIGNUM *y,
                                     BN_CTX *ctx)
